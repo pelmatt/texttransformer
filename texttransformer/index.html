@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+<style>
+  .text-area-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .text-area-box {
+    width: 48%;
+  }
+</style>
+
+  <title>OpenAI Text Transformer</title>
+</head>
+<body>
+  <h1>OpenAI Text Transformer</h1>
+
+  <label for="apiKey">Enter your API Key:</label>
+  <input type="text" id="apiKey">
+
+  <br>
+
+  <input type="file" id="fileInput">
+  
+  <br>
+
+  <div class="text-area-container">
+    <div class="text-area-box">
+      <label for="fileContent">Original Content:</label>
+      <textarea id="fileContent" rows="30" cols="100"></textarea>
+    </div>
+
+  <br>
+
+  <label for="transformedContent">Transformed Content:</label>
+  <div class="text-area-box">
+      
+      <textarea id="transformedContent" rows="30" cols="100" readonly></textarea>
+    </div>
+  </div>
+
+  <br>
+
+  <label for="userPrompt">Enter your Prompt:</label>
+  <input type="text" id="userPrompt">
+
+  <br>
+
+  <button id="transformButton">Transform</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
