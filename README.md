@@ -8,4 +8,5 @@ The algorithm iteratively scans your text, grasping both preceding and succeedin
 
 3/ The best part? 🌟
 It's all built on simple JS and HTML. All you need is a browser and an API key to unlock this lexical alchemy. Novices and experts alike, your textual metamorphosis awaits!
+
 🔗 (https://github.com/pelmatt/texttransformer/)
