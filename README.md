@@ -1,4 +1,4 @@
-# texttransformer
+# Frontend for Text Transformation using OpenAi API
 📣 Unveiling the OpenAI Text Transformer (simple auto-prompting)! 📝
 1/ Elevate your prose from banal to grandiloquent with a mere prompt. Upload text, enter a user-defined prompt—be it for grammar, style, or poetry—and marvel as AI reshapes your words.
 
