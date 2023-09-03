@@ -33,8 +33,19 @@ document.getElementById('fileInput').addEventListener('change', function() {
 document.getElementById('transformButton').addEventListener('click', async function() {
   const apiKey = document.getElementById('apiKey').value;
   const userPrompt = document.getElementById('userPrompt').value;
-  const originalText = document.getElementById('fileContent').value;
-  const sentences = originalText.split('.'); // You may need a more robust sentence splitter
+  let originalText = document.getElementById('fileContent').value;
+
+  // Replace speech marks with @SPEECHMARKER@
+  originalText = originalText.replace(/\"/g, '@DOUBLE_SPEECHMARKER@');
+  originalText = originalText.replace(/\'/g, '@SINGLE_SPEECHMARKER@');
+
+  // Use compromise for sentence detection
+  const doc = nlp(originalText);
+  let sentences = doc.sentences().out('array');
+
+  sentences = sentences.map(sentence => 
+    sentence.replace(/@DOUBLE_SPEECHMARKER@/g, '\"').replace(/@SINGLE_SPEECHMARKER@/g, "\'")
+  );
 
   let transformedText = "";
   let context = "";
@@ -43,15 +54,15 @@ document.getElementById('transformButton').addEventListener('click', async funct
   const sentence = sentences[i].trim();
   if (!sentence) continue;
 
-  const prevContext = sentences.slice(Math.max(i - 5, 0), i).join('. ');
-  const nextContext = sentences.slice(i + 1, i + 6).join('. ');
+  const prevContext = sentences.slice(Math.max(i - 5, 0), i);
+  const nextContext = sentences.slice(i + 1, i + 6);
 
   const messageContent = [
     `Here is the user's prompt: ${userPrompt}`,
-    `Here is the wider context: ${prevContext} . ${sentence} . ${nextContext}`, 
+    `Here is the wider context: ${prevContext}  ${sentence}  ${nextContext}`, 
     `Here is the sentence to transform: ${sentence}`
   ].join('\n');
-
+  
   const transformedSentence = await callOpenAI(apiKey, messageContent);
 
   // Check if the transformed sentence already ends with a full stop
